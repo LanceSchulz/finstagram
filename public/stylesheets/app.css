@@ -1,0 +1,35 @@
+header {
+  background-color: #244751;
+  color: #e8fdff;
+}
+
+body {
+  background-color: whitesmoke;
+}
+
+main {
+  background-color: white;
+  padding: 16px;
+}
+
+.finstagram-post {
+  margin: 48px;
+}
+
+.finstagram-post .user-info img {
+  border-radius: 50%;
+}
+
+/* Added body CSS selector to use specified Font. */
+/* For the Parisienne font, use the value "Parisienne", cursive */
+body {
+  font-family: "Roboto Condensed", sans-serif;
+}
+
+a.photo {
+  transition: padding 0.5s;
+}
+
+a.photo:hover {
+  padding: 10px;
+}
