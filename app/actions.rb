@@ -1,5 +1,5 @@
 # get '/' do
-#   File.read(File.join('app/views', 'index.html'))
+    # erb(:index)
 # end
 
 def get_humanized_time_ago(time_ago_in_minutes)
@@ -11,10 +11,10 @@ def get_humanized_time_ago(time_ago_in_minutes)
 end
 
 get '/' do
-    finstagram_post_shark = {
+    @finstagram_post_shark = {
         username: "sharky_j",
-        avatar_url: "https://nascera.com/images/sharky_j.jpg",
-        photo_url: "https://nascera.com/images/sharky.jpg",
+        avatar_url: "https://naserca.com/images/sharky_j.jpg",
+        photo_url: "https://naserca.com/images/shark.jpg",
         humanized_time_ago: get_humanized_time_ago(15),
         like_count: 0,
         comment_count: 1,
@@ -24,10 +24,10 @@ get '/' do
         }]
     }
 
-    finstagram_post_whale = {
+    @finstagram_post_whale = {
         username: "kirk_whalum",
-        avatar_url: "https://nascera.com/images/kirk_whalum.jpg",
-        photo_url: "https://nascera.com/images/whale.jpg",
+        avatar_url: "https://naserca.com/images/kirk_whalum.jpg",
+        photo_url: "https://naserca.com/images/whale.jpg",
         humanized_time_ago: get_humanized_time_ago(65),
         like_count: 0,
         comment_count: 1,
@@ -37,10 +37,10 @@ get '/' do
         }]
     }
 
-    finstagram_post_marlin = {
+    @finstagram_post_marlin = {
         username: "marlin_peppa",
-        avatar_url: "https://nascera.com/images/marlin_peppa.jpg",
-        photo_url: "https://nascera.com/images/marlin.jpb",
+        avatar_url: "https://naserca.com/images/marlin_peppa.jpg",
+        photo_url: "https://naserca.com/images/marlin.jpg",
         humanized_time_ago: get_humanized_time_ago(190),
         like_count: 0,
         comment_count: 1,
@@ -49,8 +49,10 @@ get '/' do
             text: "lunchtime! ;)"
         }]
     }
+    
+    @finstgram_posts = [@finstagram_post_shark, @finstagram_post_whale, @finstagram_post_marlin]
 
-    return [finstagram_post_shark, finstagram_post_shark, finstagram_post_marlin].to_s
+    erb(:index)
 end
 
 get '/fizzbuzz' do
