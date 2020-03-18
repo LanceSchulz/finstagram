@@ -10,51 +10,19 @@ def get_humanized_time_ago(time_ago_in_minutes)
     end
 end
 
+# The '/' Route
+
+##################
+#### HOMEPAGE ####
+##################
 get '/' do
-    @finstagram_post_shark = {
-        username: "sharky_j",
-        avatar_url: "https://naserca.com/images/sharky_j.jpg",
-        photo_url: "https://naserca.com/images/shark.jpg",
-        humanized_time_ago: get_humanized_time_ago(15),
-        like_count: 0,
-        comment_count: 1,
-        comments: [{
-            username: "sharky_j",
-            text: "Out for the long weekend... too embarassed to show the beach bod!"
-        }]
-    }
-
-    @finstagram_post_whale = {
-        username: "kirk_whalum",
-        avatar_url: "https://naserca.com/images/kirk_whalum.jpg",
-        photo_url: "https://naserca.com/images/whale.jpg",
-        humanized_time_ago: get_humanized_time_ago(65),
-        like_count: 0,
-        comment_count: 1,
-        comments: [{
-            username: "kirk_whalum",
-            text: "#weekendvibes"
-        }]
-    }
-
-    @finstagram_post_marlin = {
-        username: "marlin_peppa",
-        avatar_url: "https://naserca.com/images/marlin_peppa.jpg",
-        photo_url: "https://naserca.com/images/marlin.jpg",
-        humanized_time_ago: get_humanized_time_ago(190),
-        like_count: 0,
-        comment_count: 1,
-        comments: [{
-            username: "marlin_peppa",
-            text: "lunchtime! ;)"
-        }]
-    }
-    
-    @finstgram_posts = [@finstagram_post_shark, @finstagram_post_whale, @finstagram_post_marlin]
-
+    @finstagram_posts = FinstagramPost.order(created_at: :desc)
     erb(:index)
 end
 
+##################
+#### FIZZBUZZ ####
+##################
 get '/fizzbuzz' do
     my_string = ""
 
@@ -74,6 +42,9 @@ get '/fizzbuzz' do
     return my_string
 end
 
+####################
+#### YELLOWPAGE ####
+####################
 get '/yellow' do
     # Write a method that accepts a 10-character string of letters and outputs a corresponding phone number string. If the input letter string isn't 10 characters, you should return false (indicating that the input is not valid).
     my_old_string = "hellohello"
