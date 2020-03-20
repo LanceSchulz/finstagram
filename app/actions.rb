@@ -20,6 +20,31 @@ get '/' do
     erb(:index)
 end
 
+get '/signup' do        # if a user navigates to the path "/signup",
+    @user = User.new    # setup empty @user object
+    erb(:signup)        # render "apps/views/signup.erb"
+end
+
+post '/signup' do
+
+    # grab user input values from params
+    my_email       = params[:email]
+    my_avatar_url  = params[:avatar_url]
+    my_username    = params[:username]
+    my_password    = params[:password]
+ 
+    # Instantiate a User
+    @user = User.new({ email: my_email, avatar_url: my_avatar_url, username: my_username, password: my_password })
+
+    # If user validation pass and user is saved.
+    did_user_save = @user.save
+    if did_user_save
+        "User #{my_username} saved!"
+    else
+        erb(:signup)
+    end
+end
+
 ##################
 #### FIZZBUZZ ####
 ##################
