@@ -1,6 +1,8 @@
-# get '/' do
-    # erb(:index)
-# end
+helpers do
+    def current_user
+        User.find_by(id: session[:user_id])
+    end
+end
 
 def get_humanized_time_ago(time_ago_in_minutes)
     if time_ago_in_minutes >= 60
@@ -17,12 +19,12 @@ end
 ##################
 get '/' do
     @finstagram_posts = FinstagramPost.order(created_at: :desc)
-    erb(:index)
+    return erb(:index)
 end
 
 get '/signup' do        # if a user navigates to the path "/signup",
     @user = User.new    # setup empty @user object
-    erb(:signup)        # render "apps/views/signup.erb"
+    return erb(:signup) # render "apps/views/signup.erb"
 end
 
 post '/signup' do
@@ -39,11 +41,37 @@ post '/signup' do
     # If user validation pass and user is saved.
     did_user_save = @user.save
     if did_user_save
-        "User #{my_username} saved!"
+        redirect to('/login')
     else
-        erb(:signup)
+        return erb(:signup)
     end
 end
+
+# ###### LOGIN request
+get '/login' do             # When a get request comes into /login
+    return erb(:login)      # render /apps/view/login.erb
+end
+
+post '/login' do    # When we submit a form with action of /login
+    username = params[:username]
+    password = params[:password]
+
+    @user = User.find_by(username: username)
+
+    if @user && @user.password == password
+        session[:user_id] = @user.id
+        redirect to('/')
+    else
+        @error_message = "Login failed."
+        erb(:login)
+    end
+end
+
+get '/logout' do
+    session[:user_id] = nil
+    redirecxt to('/')
+end
+
 
 ##################
 #### FIZZBUZZ ####
