@@ -5,6 +5,8 @@ class FinstagramPost < ActiveRecord::Base
     has_many :likes
 
     validates_presence_of :user
+    # Added below
+    validates :photo_url, :user, presence: true
 
     def get_humanized_time_ago
         time_ago_in_seconds = Time.now - self.created_at
